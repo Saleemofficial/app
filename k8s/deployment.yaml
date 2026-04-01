@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name:  tod-app
-        image:  saleem030896/todapp
+        image:  saleem030896/todapp:latest
         ports:
         - containerPort:  5009
 
