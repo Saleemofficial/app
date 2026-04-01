@@ -1,0 +1,25 @@
+apiVersion:  apps/v1
+kind:  Deployment
+metadata:
+  name:  todapp
+
+spec:
+  replicas:  2
+  selector:
+    matchlabels:
+      app:  todapp
+
+  template:
+    metadata:
+      labels:
+        app:  todapp
+
+    spec:
+      containers:
+      - name:  tod-app
+        image:  saleem030896/todapp
+        ports:
+        - containerPort:  5009
+
+
+
