@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: ''
+                git branch: 'main', url: 'https://github.com/Saleemofficial/app'
             }
         }
 
@@ -42,15 +42,11 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-    steps {
-        sh 'kubectl --kubeconfig=/root/.kube/config get nodes'
-        sh 'kubectl --kubeconfig=/root/.kube/config set image deployment/$KUBE_DEPLOYMENT $KUBE_CONTAINER=$IMAGE_NAME:$IMAGE_TAG'
-        sh 'kubectl --kubeconfig=/root/.kube/config rollout status deployment/$KUBE_DEPLOYMENT'
-    }
-}
-
-
-
-
+            steps {
+                sh 'kubectl --kubeconfig=/var/jenkins_home/.kube/config get nodes'
+                sh 'kubectl --kubeconfig=/var/jenkins_home/.kube/config set image deployment/$KUBE_DEPLOYMENT $KUBE_CONTAINER=$IMAGE_NAME:$IMAGE_TAG'
+                sh 'kubectl --kubeconfig=/var/jenkins_home/.kube/config rollout status deployment/$KUBE_DEPLOYMENT'
+            }
+        }
     }
 }
